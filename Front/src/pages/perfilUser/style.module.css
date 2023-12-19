@@ -1,0 +1,19 @@
+* {
+	background-color: #cfcbca;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.containerbutton{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.buttonB{
+	margin: 0 20px;
+}
