@@ -1,0 +1,161 @@
+.Container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	flex-grow: 4;
+	background-color: #cfcbca;
+	width: 100%;
+	height: 100vh;
+}
+
+.Imagem {
+	align-self: center;
+	width:100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+
+.Imagem img {
+	margin-left: 50px;
+	width:90%;
+	max-width: 100%;
+	height: auto;
+}
+
+.containerText{
+	width: 100%;
+}
+
+.test{
+	width: 100%;
+	background-color: transparent;
+	padding: 0 10% 0 10%;
+}
+
+.ContentForm {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	background-color: transparent;
+	padding: 0 10% 0 10%;
+	border-radius: 5px;
+}
+
+.Label {
+	font-size: 18px;
+	font-weight: 600;
+	color: #fff;
+}
+
+.h3titulo {
+	color: #4b5c73;
+	font-family: Roboto;
+	font-size: 30px;
+	font-style: normal;
+	font-weight: 600;
+	margin-bottom: 30px;
+	padding: 0;
+	margin-left: 0;
+}
+
+.spanText {
+	color: #222;
+	font-family: Roboto;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+	display: block;
+	margin-top: 10px;
+	margin-left: 0;
+}
+
+.InputForm {
+	background-color: transparent;
+	flex-grow: 1;
+	padding: 0.8em;
+	border: 1px solid #5b5b5b;
+	border-radius: 20px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #717171;
+	outline: none;
+	width: 100%;
+}
+
+
+.LabelError {
+	font-size: 14px;
+	color: #717171;
+}
+
+.ButtonComponent {
+	background: #4b5c73;
+	color: #ffffff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 20px;
+	font-size: 16px;
+	cursor: pointer;
+	width: 100%;
+	margin-bottom: 60px;
+}
+
+@media only screen and (max-width: 800px) {
+	.Container {
+		grid-template-columns: 1fr;
+		flex-direction: column;
+		height: 100%;
+	}
+	h3titulo {
+		font-size: 20px;
+	}
+	spanText {
+		font-size: 14px;
+	}
+
+	.Imagem img {
+		width: 100%;
+		padding-bottom: 100px;
+		margin-left: 0px;
+		margin-bottom: 0;
+	}
+	.ContentForm{
+		width: 100%;
+	}
+	.InputForm {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.Container {
+		grid-template-columns: 1fr;
+		flex-direction: column;
+		height: 100%;
+	}
+	h3titulo {
+		font-size: 20px;
+	}
+	spanText {
+		font-size: 14px;
+	}
+
+	.Imagem img {
+		width: 100%;
+		padding-bottom: 100px;
+		margin-left: 0;
+		margin-bottom: -25%;
+	}
+	.ContentForm{
+		width: 100%;
+	}
+	.InputForm,
+	.ButtonComponent {
+		width: 100%;
+	}
+}
+
