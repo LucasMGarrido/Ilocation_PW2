@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ValidationRegisterUser, ValidationRegisterUserType } from '../../util/validationRegisterUser';
-import { useNavigate } from 'react-router-dom';
-import Imagem from '../../assets/usuario.png';
+import Imagem from '../../assets/editUser.png';
 
 import Styles from './style.module.css';
 import Botao from '../../componentes/botao/botao';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-export function RegisterUser() {
+interface Auth {
+	auth: boolean;
+	token: string;
+	id: number;
+}
+
+interface User{
+    nome: string
+    email: string
+    telefone: string
+    senha: string
+    cidade: string
+    bairro: string
+    rua: string
+    numero: string
+}
+
+
+export function EditUser() {
 	const {
 		register,
 		handleSubmit,
@@ -18,19 +36,58 @@ export function RegisterUser() {
 	} = useForm<ValidationRegisterUserType>({
 		resolver: zodResolver(ValidationRegisterUser),
 	});
+	
+	const [dataUserId, setUserDataId] = useState<Auth>();
+	const [exec, setExec] = useState(0)
+	const [dataUser, setUserData] = useState<User>({
+    nome: '',
+    email: '',
+    telefone: '',
+    senha: '',
+    cidade: '',
+    bairro: '',
+    rua: '',
+    numero: '',
+	})
+
 
 	const urlApi = "http://localhost:3000/api/v1";
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 
-	const handleRegisterUser = async (data: ValidationRegisterUserType) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setUserData((prevData) => ({ ...prevData, [name]: value }));
+	};
+
+	const handleEditUser = async (data: ValidationRegisterUserType) => {
+		console.log(dataUser)
 		try {
-			console.log(data);
-			const response = await axios.post(`${urlApi}/users`, data)
-			navigate('/login')
+			const response = await axios.put(`${urlApi}/users/${dataUserId?.id}`, dataUser,{
+				headers: {
+					Authorization: dataUserId?.token
+				}
+			}
+			)
+			console.log(response.data);
+			navigate('/perfil')
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
+	const getStoredData = () => {
+		const storedData = localStorage.getItem('objetoDadosUsuario');
+		if (storedData) {
+		  setUserDataId(JSON.parse(storedData));
+		  console.log(dataUserId?.token);
+		} else {
+		  console.log('Nada');
+		}
+	  };
+
+	useEffect(() => {
+		getStoredData();
+	  }, [exec]);
 
 	return (
 		<motion.div className={Styles.Container} 
@@ -39,23 +96,19 @@ export function RegisterUser() {
 		exit={{x: window.innerWidth}}
 		>
 			<div className={Styles.Imagem}>
-				<h2 className={Styles.textLeft}>
-					Seja bem-vindo
-					<span>à nossa imobiliária!</span>
-				</h2>
 				<img src={Imagem} alt="Descrição da imagem" />
 			</div>
 
 			<div className={Styles.containerText}>
 				<div className={Styles.scriptText}>
 					<h1>
-						Cadastre-se <span> e encontre o lar dos seus sonhos em apenas alguns cliques</span>
+						Edite seus dados<span> para encontrar o seu lar bem atualizado!</span>
 					</h1>
 				</div>
 
 				<form
 					className={Styles.ContentForm}
-					onSubmit={handleSubmit(handleRegisterUser)}
+					onSubmit={handleSubmit(handleEditUser)}
 				>
 
 					{/* -------- Input do nome -------- */}
@@ -64,6 +117,8 @@ export function RegisterUser() {
 						type="text"
 						placeholder="Digite o seu nome"
 						{...register('nome')}
+						onChange={handleInputChange}
+						
 					/>
 					{errors.nome?.message && (
 						<label className={Styles.LabelError}>
@@ -77,6 +132,8 @@ export function RegisterUser() {
 						type="text"
 						placeholder="Digite o seu email"
 						{...register('email')}
+						onChange={handleInputChange}
+						
 					/>
 					{errors.email?.message && (
 						<label className={Styles.LabelError}>
@@ -90,6 +147,8 @@ export function RegisterUser() {
 						type="text"
 						placeholder="Informe o seu telefone"
 						{...register('telefone')}
+						onChange={handleInputChange}
+						
 					/>
 					{errors.telefone?.message && (
 						<label className={Styles.LabelError}>
@@ -100,9 +159,11 @@ export function RegisterUser() {
 					{/* -------- Input da Senha -------- */}
 					<input
 						className={Styles.InputForm}
-						type="text"
+						type="password"
 						placeholder="Digite sua senha"
 						{...register('senha')}
+						onChange={handleInputChange}
+						
 					/>
 					{errors.senha?.message && (
 						<label className={Styles.LabelError}>
@@ -116,6 +177,8 @@ export function RegisterUser() {
 						type="text"
 						placeholder="Informe a sua cidade"
 						{...register('cidade')}
+						onChange={handleInputChange}
+						
 					/>
 					{errors.cidade?.message && (
 						<label className={Styles.LabelError}>
@@ -129,6 +192,8 @@ export function RegisterUser() {
 						type="text"
 						placeholder="Informe o seu bairro"
 						{...register('bairro')}
+						onChange={handleInputChange}
+						
 					/>
 					{errors.bairro?.message && (
 						<label className={Styles.LabelError}>
@@ -142,6 +207,8 @@ export function RegisterUser() {
 						type="text"
 						placeholder="Informe a sua rua"
 						{...register('rua')}
+						onChange={handleInputChange}
+						
 					/>
 					{errors.rua?.message && (
 						<label className={Styles.LabelError}>
@@ -155,6 +222,8 @@ export function RegisterUser() {
 						type="text"
 						placeholder="Informe o número da sua casa"
 						{...register('numero')}
+						onChange={handleInputChange}
+						
 					/>
 					{errors.numero?.message && (
 						<label className={Styles.LabelError}>
@@ -163,7 +232,7 @@ export function RegisterUser() {
 					)}
 
 					{/* -------- Botão de enivar-cadastrar OBS: Fazer um componente! -------- */}
-					<Botao label="Cadastrar" type="submit" />
+					<Botao label="Atualizar" type="submit"/>
 				</form>
 			</div>
 		</motion.div>
@@ -172,4 +241,4 @@ export function RegisterUser() {
 
 //Fazer um componente para esse botão e servir para todos os botões da aplicação e mudando a cor deles.
 
-export default RegisterUser;
+export default EditUser;

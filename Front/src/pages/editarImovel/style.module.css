@@ -1,0 +1,116 @@
+.Container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	flex-grow: 4;
+	background-color: #cfcbca;
+	width: 100%;
+	height: 100vh;
+}
+
+.Imagem {
+	align-self: center;
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+
+.Imagem img {
+	width:90%;
+	max-width: 100%;
+	height: auto;
+}
+
+.containerText{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.ContentForm {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	background-color: transparent;
+	padding: 0 10% 0 10%;
+	border-radius: 5px;
+}
+
+.Label {
+	font-size: 18px;
+	font-weight: 600;
+	color: #fff;
+}
+
+.scriptText{
+	width: 100%;
+}
+
+.scriptText h1 {
+	color: #4b5c73;
+	font-family: Roboto;
+	font-size: 30px;
+	font-weight: 600;
+	margin-bottom: 3%;
+	padding: 0;
+	margin-left: 10%;
+}
+
+.scriptText span {
+	color: #222;
+	font-family: Roboto;
+	font-size: 20px;
+	font-weight: 600;
+	display: block;
+	margin-top: 10px;
+	margin-left: 0;
+}
+
+.InputForm {
+	background-color: transparent;
+	flex-grow: 1;
+	padding: 0.8em;
+	border: 1px solid #5b5b5b;
+	border-radius: 20px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #717171;
+	outline: none;
+	width: 100%;
+}
+
+.LabelError {
+	font-size: 14px;
+	color: #717171;
+}
+
+@media only screen and (max-width: 800px) {
+	.Container {
+		grid-template-columns: 1fr;
+		flex-direction: column;
+		height: 100%;
+	}
+	.scriptText h1 {
+		font-size: 30px;
+	}
+	.scriptText span{
+		font-size: 18px;
+	}
+
+	.Imagem img {
+		width: 100%;
+		padding-bottom: 0;
+		margin-left: 0px;
+		margin-bottom: 0;
+	}
+	.ContentForm{
+		width: 100%;
+	}
+	.InputForm {
+		width: 100%;
+	}
+}
