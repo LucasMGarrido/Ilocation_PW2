@@ -1,0 +1,88 @@
+@import url('../../fontes/fontes.css');
+
+* {
+	background-color: #cfcbca;
+}
+
+.Container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	background-color: #cfcbca;
+	width: 100%;
+	height: 100vh;
+}
+
+.Imagem {
+	align-self: center;
+	width:100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+
+.Imagem img {
+	width:100%;
+	max-width: 100%;
+	height: auto;
+}
+
+.text {
+	width:80%;
+	margin: 0 0 0 5%;
+	padding: 0;
+}
+
+h2 {
+	color: #222;
+	font-family: Roboto;
+	font-size: 64px;
+	margin-bottom: 50px;
+	font-family: 'Roboto Bold', Arial, sans-serif;
+}
+
+.text span {
+	color: #4b5c73;
+	font-size: 64px;
+	font-family: 'Roboto Bold', Arial, sans-serif;
+}
+
+.frases {
+	color: #4b5c73;
+	font-size: 24px;
+	font-weight: 800;
+	margin: 0;
+	font-family: 'Roboto Medium', Arial, sans-serif;
+}
+
+@media only screen and (max-width: 800px) {
+	.Container {
+		grid-template-columns: 1fr;
+		margin-top: -10%;
+	}
+	h2,
+	.text span{
+		font-size: 24px;
+	}
+	
+	.Imagem img {
+		width: 90%;
+		margin: -10% 0 20px 0;
+	}
+	.frases {
+		font-size: 16px;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.Container {
+		grid-template-columns: 1fr;
+	}
+	.Imagem img {
+		width: 100%;
+	}
+    h2,
+	.text span {
+		font-size: 24px;
+	}
+}
